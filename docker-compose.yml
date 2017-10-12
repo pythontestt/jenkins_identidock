@@ -1,0 +1,29 @@
+version: "3"
+services:
+  identidock:
+    # replace username/repo:tag with your name and image details
+    image: localhost:5000/identidock:v1.0
+#    deploy:
+#      replicas: 5
+#      restart_policy:
+#        condition: on-failure
+#      resources:
+#        limits:
+#          cpus: "0.1"
+#          memory: 50M
+    ports:
+      - "80:5000"
+    environment:
+      ENV: DEV
+    volumes:
+      - ./app:/app
+    links:
+      - dnmonster
+      - redis
+
+  dnmonster:
+    image: amouat/dnmonster:1.0
+ 
+  redis:
+    image: redis:3.0
+
